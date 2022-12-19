@@ -1,16 +1,16 @@
 import type { Component } from 'solid-js';
-
-import logo from './logo.svg';
-import styles from './App.module.css';
+import {useRoutes} from "@solidjs/router";
+import routes from "./routes/routes";
+import Layout from "./layout/Layout";
 
 const App: Component = () => {
-  return (
-    <div class={styles.App}>
-      <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </div>
-  );
+    const Routes = useRoutes(routes);
+
+    return (
+      <Layout>
+          <Routes />
+      </Layout>
+    );
 };
 
 export default App;

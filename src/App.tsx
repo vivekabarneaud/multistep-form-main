@@ -7,9 +7,11 @@ const App: Component = () => {
     const Routes = useRoutes(routes);
 
     return (
-      <Layout>
-          <Routes />
-      </Layout>
+        <div class="main flex items-center justify-center min-h-screen w-screen bg-[#EEF5FF]">
+            <Layout>
+                <Routes />
+            </Layout>
+        </div>
     );
 };
 

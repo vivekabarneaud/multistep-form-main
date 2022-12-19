@@ -4,19 +4,19 @@ import {lazy} from "solid-js";
 const routes: RouteDefinition[] = [
     {
         path: "/your-info",
-        component: lazy(() => import("./routes/YourInfo"))
+        component: lazy(() => import("./pages/YourInfo"))
     },
     {
         path: "/select-plan",
-        component: lazy(() => import("./routes/SelectPlan"))
+        component: lazy(() => import("./pages/SelectPlan"))
     },
     {
         path: "/addons",
-        component: lazy(() => import("./routes/AddOns"))
+        component: lazy(() => import("./pages/AddOns"))
     },
     {
         path: "/summary",
-        component: lazy(() => import("./routes/Summary"))
+        component: lazy(() => import("./pages/Summary"))
     },
 ];
 

@@ -2,6 +2,7 @@ import { A } from "@solidjs/router";
 import {createSignal, For, ParentComponent, Show} from "solid-js";
 import NavbarDesktop from "./NavbarDesktop";
 import routes from "../routes/routes";
+import NavbarButton from "./NavbarButton";
 
 const Layout: ParentComponent = (props) => {
     const [screenW, setScreenW] = createSignal<number>(window.innerWidth);
@@ -16,13 +17,7 @@ const Layout: ParentComponent = (props) => {
                 <div class="flex px-24 justify-between items-center w-full">
                     <For each={routes}>
                         {
-                            (route, index) => <A
-                            href={typeof route.path === "string" ? route.path : route.path[0]}
-                            class="step-btn"
-                            activeClass="step-btn-active"
-                            >
-                                {index() + 1}
-                            </A>
+                            (route, index) => <NavbarButton route={typeof route.path === "string" ? route.path : route.path[0]} step={index() + 1} />
                         }
                     </For>
                 </div>

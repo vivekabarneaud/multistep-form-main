@@ -12,11 +12,11 @@ body {
 }
 
 .step-btn {
-  @apply rounded-full border border-white text-white py-2 px-4 bg-transparent
+  @apply rounded-full flex items-center justify-center w-8 h-8 border border-white text-white text-sm font-semibold bg-transparent
 }
 
 .step-btn-active {
-  @apply rounded-full border border-white text-black py-2 px-4 bg-[#BEE2FC]
+  @apply rounded-full flex items-center justify-center w-8 h-8 border border-white text-sm font-semibold text-black bg-[#BEE2FC]
 }
 
 @media(max-width: 576px) {

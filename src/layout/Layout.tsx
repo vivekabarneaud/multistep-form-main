@@ -15,7 +15,15 @@ const Layout: ParentComponent = (props) => {
             <div class="flex flex-col w-full min-h-screen pt-12 gap-y-6">
                 <div class="flex px-24 justify-between items-center w-full">
                     <For each={routes}>
-                        {(route, index) => <A href={typeof route.path === "string" ? route.path : route.path[0]} class="step-btn" activeClass="step-btn-active">{index() + 1}</A>}
+                        {
+                            (route, index) => <A
+                            href={typeof route.path === "string" ? route.path : route.path[0]}
+                            class="step-btn"
+                            activeClass="step-btn-active"
+                            >
+                                {index() + 1}
+                            </A>
+                        }
                     </For>
                 </div>
 

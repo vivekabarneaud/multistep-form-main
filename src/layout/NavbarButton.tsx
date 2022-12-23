@@ -13,11 +13,11 @@ const NavbarButton: (props: NavbarButtonProps) => JSX.Element = (props: NavbarBu
     }
 
     return (
-        <div class="flex items-center">
+        <div class="flex items-center md:py-3">
             <A href={props.route} class="step-btn" activeClass="step-btn-active">{props.step}</A>
-            <div class="hidden md:flex md:flex-col">
-                <h4 class="text-xs uppercase text-white opacity-50">step {props.step}</h4>
-                <h3 class="text-xs uppercase font-bold text-white">{createLabelFromPath(props.route)}</h3>
+            <div class="hidden md:flex md:flex-col md:pl-4">
+                <h4 class="text-xs uppercase font-light text-white opacity-50">step {props.step}</h4>
+                <h3 class="text-xs uppercase font-semibold text-white tracking-widest">{createLabelFromPath(props.route)}</h3>
             </div>
         </div>
     )

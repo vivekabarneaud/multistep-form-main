@@ -32,6 +32,9 @@ const Layout: ParentComponent = (props) => {
                     <img src="/public/assets/images/bg-sidebar-desktop.svg" alt="sidebar background abstract" />
                     <NavbarDesktop />
                 </div>
+                <div class="px-20 py-10">
+                    {props.children}
+                </div>
             </div>
         </Show>
         </>

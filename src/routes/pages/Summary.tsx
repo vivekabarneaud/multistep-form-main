@@ -1,7 +1,7 @@
 import {Component} from "solid-js";
 
 const Summary: Component = () => {
-    return (<>SELECT PLAN</>)
+    return (<>SUMMARY</>)
 }
 
 export default Summary;

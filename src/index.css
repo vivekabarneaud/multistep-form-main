@@ -27,6 +27,26 @@ body {
   @apply  px-3 py-2 border border-gray-200 rounded-lg font-medium text-[#345172] placeholder:font-normal focus:outline-[1px] focus:outline-violet-800
 }
 
+.page-title {
+  @apply text-4xl font-semibold text-[#0E2E60] mb-3
+}
+
+.page-description {
+  @apply max-w-xl text-gray-400 mb-8
+}
+
+.card-selected {
+  @apply border-violet-800 bg-[#F8F9FE]
+}
+
+.card-not-selected {
+  @apply border-gray-200 bg-transparent
+}
+
+form {
+  @apply flex flex-col gap-y-4 h-full pb-16 md:pb-0
+}
+
 @media(max-width: 576px) {
   .main {
     background-image: url("/public/assets/images/bg-sidebar-mobile.svg");

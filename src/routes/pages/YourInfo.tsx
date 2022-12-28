@@ -1,23 +1,23 @@
 import {Component, createSignal} from "solid-js";
 import TextInput from "../../formUtils/TextInput";
 import {useNavigate} from "@solidjs/router";
-
-export type PersonalInformation = {
-    name: string;
-    email: string;
-    phone: string;
-}
+import {validate} from "../../formUtils/validation";
+import {PersonalInformation, setAnswers} from "../../store/answers";
 
 const YourInfo: Component = () => {
     const navigate = useNavigate();
-    const [answers, setAnswers] = createSignal<PersonalInformation>({} as PersonalInformation);
+    const [pageAnswers, setPageAnswers] = createSignal<PersonalInformation>({} as PersonalInformation);
 
     const next = (ev: Event) => {
         ev.preventDefault();
-        const regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        if (regexp.test(answers().email)) {
-            console.log("navigate")
+        if (validate(pageAnswers())) {
+            setAnswers(
+                'personalInformation',
+                (info) => ({
+                    ...info,
+                    ...pageAnswers()
+                }),
+            );
             navigate("/select-plan")
         }
     }
@@ -32,8 +32,8 @@ const YourInfo: Component = () => {
                 label={"Name"}
                 type={"text"}
                 placeholder={"Enter your name..."}
-                onChange={(ev: Event) => setAnswers({
-                    ...answers(),
+                onChange={(ev: Event) => setPageAnswers({
+                    ...pageAnswers(),
                     name: (ev.target as HTMLInputElement).value
                 })}
             />
@@ -41,8 +41,8 @@ const YourInfo: Component = () => {
                 label={"Email"}
                 type={"email"}
                 placeholder={"Enter your email address..."}
-                onChange={(ev: Event) => setAnswers({
-                    ...answers(),
+                onChange={(ev: Event) => setPageAnswers({
+                    ...pageAnswers(),
                     email: (ev.target as HTMLInputElement).value
                 })}
             />
@@ -50,8 +50,8 @@ const YourInfo: Component = () => {
                 label={"Phone"}
                 type={"text"}
                 placeholder={"e.g. +1 234 567 890"}
-                onChange={(ev: Event) => setAnswers({
-                    ...answers(),
+                onChange={(ev: Event) => setPageAnswers({
+                    ...pageAnswers(),
                     phone: (ev.target as HTMLInputElement).value
                 })}
             />

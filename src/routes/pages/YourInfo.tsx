@@ -13,7 +13,7 @@ const YourInfo: Component = () => {
         if (validate(pageAnswers())) {
             setAnswers(
                 'personalInformation',
-                (info) => ({
+                (info: PersonalInformation) => ({
                     ...info,
                     ...pageAnswers()
                 }),
@@ -25,9 +25,9 @@ const YourInfo: Component = () => {
     // TODO collect data
     // TODO required field: manage CSS
     return (<div class="flex flex-col h-full">
-        <h2 class="text-4xl font-semibold text-[#0E2E60] mb-3">Personal info</h2>
-        <p class="max-w-xl text-gray-400 mb-8">Please provide your name, email address, and phone number.</p>
-        <form class="flex flex-col gap-y-4 h-full pb-16 md:pb-0">
+        <h2 class="page-title">Personal info</h2>
+        <p class="page-description">Please provide your name, email address, and phone number.</p>
+        <form>
             <TextInput
                 label={"Name"}
                 type={"text"}

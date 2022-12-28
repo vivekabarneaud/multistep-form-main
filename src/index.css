@@ -19,6 +19,10 @@ body {
   @apply rounded-full flex items-center justify-center w-8 h-8 border border-white text-sm font-semibold text-black bg-[#BEE2FC]
 }
 
+.input-label {
+  @apply text-sm font-medium text-[#0E2E60]
+}
+
 .text-input {
   @apply  px-3 py-2 border border-gray-200 rounded-lg font-medium text-[#345172] placeholder:font-normal focus:outline-[1px] focus:outline-violet-800
 }

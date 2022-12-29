@@ -3,9 +3,12 @@ import routes from "../routes/routes";
 import NavbarButton from "./NavbarButton";
 
 const NavbarDesktop: Component = () => {
+    const routesToShow = [...routes];
+    routesToShow.pop();
+
     return (
         <div class="flex flex-col absolute top-0 left-0 pl-6 pt-7">
-            <For each={routes}>
+            <For each={routesToShow}>
                 {
                     (route, index) => <NavbarButton route={typeof route.path === "string" ? route.path : route.path[0]} step={index() + 1} />
                 }

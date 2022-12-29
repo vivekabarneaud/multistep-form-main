@@ -31,7 +31,9 @@ const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: Prev
             <Show when={step() > 0} fallback={<div></div>}>
                 <button class="px-3 py-2 bg-transparent text-gray-400 font-semibold" onClick={(ev: Event) => prev(ev)}>Go back</button>
             </Show>
-            <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={(ev: Event) => next(ev)}>{location.pathname.includes("summary") ? "Confirm" : "Next step"}</button>
+            <Show when={step() < 3} fallback={<button type="submit" class="px-4 py-2 rounded bg-[#483EFE] hover:bg-[#5F56EE] text-white" onClick={(ev: Event) => next(ev)}>Confirm</button>}>
+                <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={(ev: Event) => next(ev)}>Next step</button>
+            </Show>
         </div>
     )
 }

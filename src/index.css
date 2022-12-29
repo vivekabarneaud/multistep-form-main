@@ -11,6 +11,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer base {
+  @font-face {
+    font-family: Ubuntu;
+    font-weight: 400;
+    src: url(/public/assets/fonts/Ubuntu-Regular.ttf) format("ttf");
+  }
+  @font-face {
+    font-family: Ubuntu;
+    font-weight: 500;
+    src: url(/public/assets/fonts/Ubuntu-Medium.ttf) format("ttf");
+  }
+  @font-face {
+    font-family: Ubuntu;
+    font-weight: 600;
+    src: url(/public/assets/fonts/Ubuntu-Bold.ttf) format("ttf");
+  }
+}
+
 .step-btn {
   @apply rounded-full flex items-center justify-center w-8 h-8 border border-white text-white text-sm font-semibold bg-transparent
 }

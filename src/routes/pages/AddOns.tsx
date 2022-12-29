@@ -3,7 +3,6 @@ import {Addon, answers, BillingPlan, setAnswers} from "../../store/answers";
 import {validate} from "../../formUtils/validation";
 import AddonCard from "../../formUtils/AddonCard";
 import PrevNextButton from "../../layout/PrevNextButton";
-import addonCard from "../../formUtils/AddonCard";
 
 const AddOns: Component = () => {
     const addons: Addon[] = [
@@ -36,13 +35,7 @@ const AddOns: Component = () => {
         } else {
             addons.push(addon);
         }
-        setCurrentAddons(addons);
-        console.log("current addons: ", currentAddons())
-    }
-
-    const isAddonSelected = (addon: Addon): boolean => {
-        console.log("is selected? ", !!currentAddons().find(el => el.label === addon.label))
-        return !!currentAddons().find(el => el.label === addon.label);
+        setCurrentAddons([...addons]);
     }
 
     return (<div class="flex flex-col h-full">
@@ -50,7 +43,7 @@ const AddOns: Component = () => {
         <p class="page-description">Add-ons help enhance your gaming experience.</p>
         <form>
             <For each={addons}>
-                {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={isAddonSelected(addon)} onClick={selectAddon} />}
+                {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={!!currentAddons().find(el => el.label === addon.label)} onClick={selectAddon} />}
             </For>
 
             <PrevNextButton saveAnswers={saveAnswers} />

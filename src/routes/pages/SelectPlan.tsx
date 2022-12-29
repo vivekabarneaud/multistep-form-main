@@ -26,7 +26,7 @@ const SelectPlan: Component = () => {
         if (validate(currentPlan())) {
             setAnswers(
                 'selectedPlan',
-                (plan: Plan) => ({
+                () => ({
                     billingPlan: billingPlan(),
                     ...currentPlan(),
                 }),

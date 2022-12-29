@@ -1,7 +1,61 @@
-import {Component} from "solid-js";
+import {Component, createSignal, For} from "solid-js";
+import {Addon, answers, BillingPlan, setAnswers} from "../../store/answers";
+import {validate} from "../../formUtils/validation";
+import AddonCard from "../../formUtils/AddonCard";
+import PrevNextButton from "../../layout/PrevNextButton";
+import addonCard from "../../formUtils/AddonCard";
 
 const AddOns: Component = () => {
-    return (<>ADD ONS</>)
+    const addons: Addon[] = [
+        { label: "Online service", description: "Access to multiplayer games", monthlyPrice: 1, yearlyPrice: 10},
+        { label: "Larger storage", description: "Extra 1TB of cloud save", monthlyPrice: 2, yearlyPrice: 20},
+        { label: "Customizable profile", description: "Custom theme on your profile", monthlyPrice: 2, yearlyPrice: 20}
+    ];
+    const [currentAddons, setCurrentAddons] = createSignal<Addon[]>([]);
+
+    const saveAnswers = (): boolean => {
+        if (validate(currentAddons())) {
+            setAnswers(
+                'addons',
+                () => ({
+                    ...currentAddons(),
+                }),
+            );
+
+            return true;
+        }
+        return false;
+    }
+
+    const selectAddon = (addon: Addon): void => {
+        const addons: Addon[] = currentAddons();
+        const index: number = addons.findIndex(el => el.label === addon.label);
+
+        if (index >= 0) {
+            addons.splice(index, 1);
+        } else {
+            addons.push(addon);
+        }
+        setCurrentAddons(addons);
+        console.log("current addons: ", currentAddons())
+    }
+
+    const isAddonSelected = (addon: Addon): boolean => {
+        console.log("is selected? ", !!currentAddons().find(el => el.label === addon.label))
+        return !!currentAddons().find(el => el.label === addon.label);
+    }
+
+    return (<div class="flex flex-col h-full">
+        <h2 class="page-title">Pick add-ons</h2>
+        <p class="page-description">Add-ons help enhance your gaming experience.</p>
+        <form>
+            <For each={addons}>
+                {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={isAddonSelected(addon)} onClick={selectAddon} />}
+            </For>
+
+            <PrevNextButton saveAnswers={saveAnswers} />
+        </form>
+    </div>)
 }
 
 export default AddOns;

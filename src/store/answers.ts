@@ -20,9 +20,9 @@ export type Plan = {
 
 export type Addon = {
     label: string;
+    description: string;
     monthlyPrice: number;
     yearlyPrice: number;
-    selected: boolean;
 }
 
 export type Answers = {

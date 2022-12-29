@@ -20,7 +20,6 @@ const AddOns: Component = () => {
                     ...currentAddons(),
                 }),
             );
-            console.log("answers:", answers.addons)
             return true;
         }
         return false;

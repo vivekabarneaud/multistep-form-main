@@ -11,7 +11,7 @@ const SelectPlan: Component = () => {
         { label: "pro", monthlyPrice: 15, yearlyPrice: 150 },
     ];
     const [currentPlan, setCurrentPlan] = createSignal<Plan>(answers.selectedPlan ?? plans[0]);
-    const [billingPlan, setBillingPlan] = createSignal<BillingPlan>(BillingPlan.MONTHLY);
+    const [billingPlan, setBillingPlan] = createSignal<BillingPlan>(answers.selectedPlan?.billingPlan ?? BillingPlan.MONTHLY);
 
     const selectPlan = (plan: Plan): void => {
         setCurrentPlan(plan);
@@ -26,10 +26,11 @@ const SelectPlan: Component = () => {
             setAnswers(
                 'selectedPlan',
                 () => ({
-                    billingPlan: billingPlan(),
                     ...currentPlan(),
+                    billingPlan: billingPlan(),
                 }),
             );
+            console.log(answers)
             return true;
         }
         return false;
@@ -48,7 +49,7 @@ const SelectPlan: Component = () => {
             <div class="mt-4 py-1 flex items-center justify-center gap-x-2 bg-[#F8F9FE] rounded-lg text-sm">
                 <span class={billingPlan() === BillingPlan.MONTHLY ? "input-label" : "font-medium text-gray-400"}>Monthly</span>
                 <label class="relative cursor-pointer w-20 h-10 rounded-full bg-[#03285A] scale-50">
-                    <input type="checkbox" id="check" class="sr-only peer" onChange={() => toggleBillingPlan()}/>
+                    <input type="checkbox" id="check" class="sr-only peer" checked={billingPlan() === BillingPlan.YEARLY} onChange={() => toggleBillingPlan()}/>
                     <span class="absolute w-2/5 h-4/5 bg-white rounded-full left-1 top-1 peer-checked:left-11 transition-all duration-500" />
                 </label>
                 <span class={billingPlan() === BillingPlan.YEARLY ? "input-label" : "font-medium text-gray-400"}>Yearly</span>

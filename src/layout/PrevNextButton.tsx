@@ -9,7 +9,7 @@ type PrevNextButtonProps = {
 const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: PrevNextButtonProps) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const step = createMemo(() => routes.findIndex((route: RouteDefinition) => location.pathname === route.path));
+    const step = createMemo<number>(() => routes.findIndex((route: RouteDefinition) => location.pathname === route.path));
 
     const prev = (ev: Event): void => {
         ev.preventDefault();

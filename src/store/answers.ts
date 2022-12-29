@@ -20,9 +20,9 @@ export type Plan = {
 
 export type Addon = {
     label: string;
+    description: string;
     monthlyPrice: number;
     yearlyPrice: number;
-    selected: boolean;
 }
 
 export type Answers = {
@@ -31,4 +31,8 @@ export type Answers = {
     addons: Addon[];
 }
 
-export const [answers, setAnswers] = createStore<Answers>({} as Answers);
+export const [answers, setAnswers] = createStore<Answers>({
+    personalInformation: {} as PersonalInformation,
+    selectedPlan: {} as Plan,
+    addons: [] as Addon[]
+} as Answers);

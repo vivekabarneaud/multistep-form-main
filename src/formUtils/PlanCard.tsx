@@ -9,7 +9,7 @@ type PlanCardProps = {
 }
 
 const PlanCard: (props: PlanCardProps) => JSX.Element = (props: PlanCardProps) => {
-    const selectedClass = () => props.selected ? "card-selected" : "card-not-selected"
+    const selectedClass = () => props.selected ? "card-selected" : "card-not-selected";
     const priceText = () => props.billingPlan === BillingPlan.MONTHLY ? props.plan.monthlyPrice + "/mo" : props.plan.yearlyPrice + "/yr";
 
     return (<div class={"flex md:flex-col items-center md:items-start border-[1px] rounded-lg p-3 md:w-[120px] cursor-pointer transition-all duration-200 "+selectedClass()} onClick={() => props.onClick(props.plan)}>

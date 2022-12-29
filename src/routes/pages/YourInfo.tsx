@@ -1,6 +1,6 @@
 import {Component, createSignal} from "solid-js";
 import TextInput from "../../formUtils/TextInput";
-import {PersonalInformation, setAnswers} from "../../store/answers";
+import {answers, PersonalInformation, setAnswers} from "../../store/answers";
 import PrevNextButton from "../../layout/PrevNextButton";
 import {validate} from "../../formUtils/validation";
 
@@ -29,7 +29,7 @@ const YourInfo: Component = () => {
             <TextInput
                 label={"Name"}
                 type={"text"}
-                placeholder={"Enter your name..."}
+                placeholder={answers?.personalInformation?.name ?? "Enter your name..."}
                 onChange={(ev: Event) => setPageAnswers({
                     ...pageAnswers(),
                     name: (ev.target as HTMLInputElement).value
@@ -38,7 +38,7 @@ const YourInfo: Component = () => {
             <TextInput
                 label={"Email"}
                 type={"email"}
-                placeholder={"Enter your email address..."}
+                placeholder={answers?.personalInformation?.email ?? "Enter your email address..."}
                 onChange={(ev: Event) => setPageAnswers({
                     ...pageAnswers(),
                     email: (ev.target as HTMLInputElement).value
@@ -47,7 +47,7 @@ const YourInfo: Component = () => {
             <TextInput
                 label={"Phone"}
                 type={"text"}
-                placeholder={"e.g. +1 234 567 890"}
+                placeholder={answers?.personalInformation?.phone ?? "e.g. +1 234 567 890"}
                 onChange={(ev: Event) => setPageAnswers({
                     ...pageAnswers(),
                     phone: (ev.target as HTMLInputElement).value

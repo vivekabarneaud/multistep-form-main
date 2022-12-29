@@ -30,7 +30,6 @@ const SelectPlan: Component = () => {
                     billingPlan: billingPlan(),
                 }),
             );
-            console.log(answers)
             return true;
         }
         return false;

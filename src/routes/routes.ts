@@ -16,8 +16,12 @@ const routes: RouteDefinition[] = [
     },
     {
         path: "/summary",
-        component: lazy(() => import("./pages/Summary"))
+        component: lazy(() => import("./pages/Summary")),
     },
+    {
+        path: "/summary/thank-you",
+        component: lazy(() => import("./pages/ThankYou"))
+    }
 ];
 
 export default routes;

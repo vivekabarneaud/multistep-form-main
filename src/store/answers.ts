@@ -1,8 +1,8 @@
 import {createStore} from "solid-js/store";
 
 export enum BillingPlan {
-    MONTHLY,
-    YEARLY
+    MONTHLY = "Monthly",
+    YEARLY = "Yearly"
 }
 
 export type PersonalInformation = {

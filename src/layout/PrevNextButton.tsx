@@ -9,7 +9,7 @@ type PrevNextButtonProps = {
 const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: PrevNextButtonProps) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const step = createMemo(() => routes.findIndex((route: RouteDefinition) => location.pathname === route.path));
+    const step = createMemo<number>(() => routes.findIndex((route: RouteDefinition) => location.pathname === route.path));
 
     const prev = (ev: Event): void => {
         ev.preventDefault();
@@ -31,7 +31,9 @@ const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: Prev
             <Show when={step() > 0} fallback={<div></div>}>
                 <button class="px-3 py-2 bg-transparent text-gray-400 font-semibold" onClick={(ev: Event) => prev(ev)}>Go back</button>
             </Show>
-            <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={(ev: Event) => next(ev)}>Next step</button>
+            <Show when={step() < 3} fallback={<button type="submit" class="px-4 py-2 rounded bg-[#483EFE] hover:bg-[#5F56EE] text-white" onClick={(ev: Event) => next(ev)}>Confirm</button>}>
+                <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={(ev: Event) => next(ev)}>Next step</button>
+            </Show>
         </div>
     )
 }

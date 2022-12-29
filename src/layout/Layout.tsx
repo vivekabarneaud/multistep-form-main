@@ -6,6 +6,8 @@ import NavbarButton from "./NavbarButton";
 
 const Layout: ParentComponent = (props) => {
     const [screenW, setScreenW] = createSignal<number>(window.innerWidth);
+    const routesToShow = [...routes];
+    routesToShow.pop();
 
     window.addEventListener('resize', () => {
         setScreenW(window.innerWidth);
@@ -15,7 +17,7 @@ const Layout: ParentComponent = (props) => {
         <Show when={screenW() > 576} fallback={
             <div class="flex flex-col w-full min-h-screen pt-12 gap-y-6">
                 <div class="flex px-24 justify-between items-center w-full">
-                    <For each={routes}>
+                    <For each={routesToShow}>
                         {
                             (route, index) => <NavbarButton route={typeof route.path === "string" ? route.path : route.path[0]} step={index() + 1} />
                         }

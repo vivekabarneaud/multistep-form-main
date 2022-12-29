@@ -11,7 +11,7 @@ type AddonCardProps = {
 const AddonCard: (props: AddonCardProps) => JSX.Element = (props: AddonCardProps) => {
     const selectedClass = () => props.selected ? "card-selected" : "card-not-selected";
     const priceText = () => props.billingPlan === BillingPlan.MONTHLY ? props.addon.monthlyPrice + "/mo" : props.addon.yearlyPrice + "/yr";
-
+    // TODO display price
     return (<div class={"flex items-center border-[1px] rounded-lg p-3 cursor-pointer transition-all duration-200 "+selectedClass()} onClick={() => props.onClick(props.addon)}>
         <input class="form-check-input appearance-none h-4 w-4 border border-gray-200 rounded-sm bg-transparent checked:bg-[#4941E5] checked:border-[#4941E5] focus:outline-none transition duration-200" type="checkbox" checked={props.selected} />
 

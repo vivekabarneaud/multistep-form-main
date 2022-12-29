@@ -2,7 +2,6 @@ import {Component, createSignal, For} from "solid-js";
 import PlanCard from "../../formUtils/PlanCard";
 import {answers, BillingPlan, Plan, setAnswers} from "../../store/answers";
 import {validate} from "../../formUtils/validation";
-import {useNavigate} from "@solidjs/router";
 import PrevNextButton from "../../layout/PrevNextButton";
 
 const SelectPlan: Component = () => {
@@ -11,7 +10,7 @@ const SelectPlan: Component = () => {
         { label: "advanced", monthlyPrice: 12, yearlyPrice: 120 },
         { label: "pro", monthlyPrice: 15, yearlyPrice: 150 },
     ];
-    const [currentPlan, setCurrentPlan] = createSignal<Plan>(plans[0]);
+    const [currentPlan, setCurrentPlan] = createSignal<Plan>(answers.selectedPlan ?? plans[0]);
     const [billingPlan, setBillingPlan] = createSignal<BillingPlan>(BillingPlan.MONTHLY);
 
     const selectPlan = (plan: Plan): void => {

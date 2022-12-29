@@ -10,7 +10,7 @@ const AddOns: Component = () => {
         { label: "Larger storage", description: "Extra 1TB of cloud save", monthlyPrice: 2, yearlyPrice: 20},
         { label: "Customizable profile", description: "Custom theme on your profile", monthlyPrice: 2, yearlyPrice: 20}
     ];
-    const [currentAddons, setCurrentAddons] = createSignal<Addon[]>([]);
+    const [currentAddons, setCurrentAddons] = createSignal<Addon[]>([...answers.addons] ?? [] as Addon[]);
 
     const saveAnswers = (): boolean => {
         if (validate(currentAddons())) {
@@ -20,7 +20,7 @@ const AddOns: Component = () => {
                     ...currentAddons(),
                 }),
             );
-
+            console.log("answers:", answers.addons)
             return true;
         }
         return false;
@@ -43,7 +43,7 @@ const AddOns: Component = () => {
         <p class="page-description">Add-ons help enhance your gaming experience.</p>
         <form>
             <For each={addons}>
-                {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={!!currentAddons().find(el => el.label === addon.label)} onClick={selectAddon} />}
+                {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={!!currentAddons()?.find(el => el.label === addon.label)} onClick={selectAddon} />}
             </For>
 
             <PrevNextButton saveAnswers={saveAnswers} />

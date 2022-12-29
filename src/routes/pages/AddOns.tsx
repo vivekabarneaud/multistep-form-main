@@ -11,7 +11,7 @@ const AddOns: Component = () => {
         { label: "Customizable profile", description: "Custom theme on your profile", monthlyPrice: 2, yearlyPrice: 20}
     ];
     const [currentAddons, setCurrentAddons] = createSignal<Addon[]>([...answers.addons] ?? [] as Addon[]);
-
+    //  todo set store everytime, not only when pressing next
     const saveAnswers = (): boolean => {
         if (validate(currentAddons())) {
             setAnswers(

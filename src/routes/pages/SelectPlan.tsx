@@ -3,9 +3,9 @@ import PlanCard from "../../formUtils/PlanCard";
 import {answers, BillingPlan, Plan, setAnswers} from "../../store/answers";
 import {validate} from "../../formUtils/validation";
 import {useNavigate} from "@solidjs/router";
+import PrevNextButton from "../../layout/PrevNextButton";
 
 const SelectPlan: Component = () => {
-    const navigate = useNavigate();
     const plans: Plan[] = [
         { label: "arcade", monthlyPrice: 9, yearlyPrice: 90 },
         { label: "advanced", monthlyPrice: 12, yearlyPrice: 120 },
@@ -22,8 +22,7 @@ const SelectPlan: Component = () => {
             setBillingPlan(BillingPlan.YEARLY) :
             setBillingPlan(BillingPlan.MONTHLY);
     }
-    const next = (ev: Event): void => {
-        ev.preventDefault();
+    const saveAnswers = (): boolean => {
         if (validate(currentPlan())) {
             setAnswers(
                 'selectedPlan',
@@ -32,9 +31,9 @@ const SelectPlan: Component = () => {
                     ...currentPlan(),
                 }),
             );
-            navigate("/addons");
+            return true;
         }
-        console.log("answers: ", answers);
+        return false;
     }
 
     return (<div class="flex flex-col h-full">
@@ -56,10 +55,7 @@ const SelectPlan: Component = () => {
                 <span class={billingPlan() === BillingPlan.YEARLY ? "input-label" : "font-medium text-gray-400"}>Yearly</span>
             </div>
 
-            <div class="flex fixed md:relative justify-end items-end bottom-0 inset-x-0 py-4 pr-4 md:pr-0 md:py-0 w-full bg-white md:bg-transparent md:h-full">
-                <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={(ev: Event) => next(ev)}>Next step</button>
-            </div>
-
+            <PrevNextButton saveAnswers={saveAnswers} />
         </form>
     </div>)
 }

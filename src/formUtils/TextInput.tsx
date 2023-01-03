@@ -1,4 +1,5 @@
 import {JSX, Show} from "solid-js";
+import {answers, setAnswers} from "../store/answers";
 
 type TextInputProps = {
     label: string;
@@ -20,13 +21,18 @@ const TextInput = (props: TextInputProps): JSX.Element => {
             type={props.type}
             value={props.formHandler.getFieldValue(props.label)}
             onInput={({ currentTarget: { name, value } }) =>
-                //Sets and validates the field value inside the form handler.
                 props.formHandler.setFieldValue(name, value)
             }
             onBlur={({ currentTarget: { name } }) => {
-                //Field is validated and touched.
                 props.formHandler.validateField(name);
                 props.formHandler.touchField(name);
+                setAnswers(
+                    'personalInformation',
+                    () => ({
+                        ...answers.personalInformation,
+                        [name]: props.formHandler.getFieldValue(props.label)
+                    })
+                )
             }}
             class={"text-input "+(props.formHandler.fieldHasError(props.label) ? "input-errored" : "")}
             required

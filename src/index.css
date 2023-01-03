@@ -46,7 +46,7 @@ body {
 }
 
 .input-errored {
-  @apply border-red-400
+  @apply border-red-400 !important
 }
 
 .page-title {

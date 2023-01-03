@@ -1,7 +1,6 @@
 import {Component, createSignal, For} from "solid-js";
 import PlanCard from "../../formUtils/PlanCard";
 import {answers, BillingPlan, Plan, setAnswers} from "../../store/answers";
-import {validate} from "../../formUtils/validation";
 import PrevNextButton from "../../layout/PrevNextButton";
 
 const SelectPlan: Component = () => {
@@ -13,6 +12,8 @@ const SelectPlan: Component = () => {
     const [currentPlan, setCurrentPlan] = createSignal<Plan>(answers.selectedPlan ?? plans[0]);
     const [billingPlan, setBillingPlan] = createSignal<BillingPlan>(answers.selectedPlan?.billingPlan ?? BillingPlan.MONTHLY);
 
+    console.log("current answers:", answers);
+
     const selectPlan = (plan: Plan): void => {
         setCurrentPlan(plan);
     }
@@ -21,18 +22,14 @@ const SelectPlan: Component = () => {
             setBillingPlan(BillingPlan.YEARLY) :
             setBillingPlan(BillingPlan.MONTHLY);
     }
-    const saveAnswers = (): boolean => {
-        if (validate(currentPlan())) {
-            setAnswers(
-                'selectedPlan',
-                () => ({
-                    ...currentPlan(),
-                    billingPlan: billingPlan(),
-                }),
-            );
-            return true;
-        }
-        return false;
+    const saveAnswers = (): void => {
+        setAnswers(
+            'selectedPlan',
+            () => ({
+                ...currentPlan(),
+                billingPlan: billingPlan(),
+            }),
+        );
     }
 
     return (<div class="flex flex-col h-full">
@@ -54,7 +51,7 @@ const SelectPlan: Component = () => {
                 <span class={billingPlan() === BillingPlan.YEARLY ? "input-label" : "font-medium text-gray-400"}>Yearly</span>
             </div>
 
-            <PrevNextButton saveAnswers={saveAnswers} />
+            <PrevNextButton isFormValid={true} />
         </form>
     </div>)
 }

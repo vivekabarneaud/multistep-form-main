@@ -1,8 +1,9 @@
-import {Component, createSignal} from "solid-js";
+import {Component, createEffect, createSignal} from "solid-js";
 import {answers, PersonalInformation, setAnswers} from "../../store/answers";
 import {useFormHandler, yupSchema} from "solid-form-handler";
 import {personalInformationSchema} from "../../formUtils/validation";
 import TextInput from "../../formUtils/TextInput";
+import PrevNextButton from "../../layout/PrevNextButton";
 
 const YourInfo: Component = () => {
     const [pageAnswers, setPageAnswers] = createSignal<PersonalInformation>({} as PersonalInformation);
@@ -14,7 +15,6 @@ const YourInfo: Component = () => {
         try {
             await formHandler.validateForm();
             console.log('Data sent with success: ' + JSON.stringify(formData()));
-            //formHandler.resetForm();
         } catch (error) {
             console.error(error);
         }
@@ -28,7 +28,7 @@ const YourInfo: Component = () => {
             <TextInput label="email" type="email" formHandler={formHandler} />
             <TextInput label="phone" type="text" formHandler={formHandler} />
 
-            <button disabled={formHandler.isFormInvalid()}>Submit</button>
+            <PrevNextButton isFormValid={!formHandler.isFormInvalid()} />
         </form>
 
     </div>)

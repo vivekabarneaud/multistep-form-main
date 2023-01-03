@@ -8,6 +8,7 @@ type TextInputProps = {
 }
 
 const TextInput = (props: TextInputProps): JSX.Element => {
+    //FIXME errors only appear at second click on Next button if the inputs haven't been clicked
     onMount(() => {
         if (answers.personalInformation?.[props.label]) {
             props.formHandler.setFieldValue(props.label, answers.personalInformation?.[props.label]);

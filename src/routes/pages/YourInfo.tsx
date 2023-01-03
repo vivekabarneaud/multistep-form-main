@@ -16,7 +16,7 @@ const YourInfo: Component = () => {
         }
     };
 
-    return (<div class="flex flex-col h-full">
+    return (<div class="flex flex-col h-full w-full">
         <h2 class="page-title">Personal info</h2>
         <p class="page-description">Please provide your name, email address, and phone number.</p>
         <form onSubmit={submit}>

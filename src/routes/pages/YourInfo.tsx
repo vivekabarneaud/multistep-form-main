@@ -6,12 +6,12 @@ import TextInput from "../../formUtils/TextInput";
 import PrevNextButton from "../../layout/PrevNextButton";
 
 const YourInfo: Component = () => {
-    const [pageAnswers, setPageAnswers] = createSignal<PersonalInformation>({} as PersonalInformation);
     const formHandler = useFormHandler(yupSchema(personalInformationSchema));
     const { formData } = formHandler;
 
     const submit = async (event: Event) => {
         event.preventDefault();
+        console.log("submit")
         try {
             await formHandler.validateForm();
             console.log('Data sent with success: ' + JSON.stringify(formData()));

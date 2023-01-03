@@ -1,6 +1,5 @@
-import {Component, createSignal, For} from "solid-js";
+import {Component, For} from "solid-js";
 import {Addon, answers, BillingPlan, setAnswers} from "../../store/answers";
-import {validate} from "../../formUtils/validation";
 import AddonCard from "../../formUtils/AddonCard";
 import PrevNextButton from "../../layout/PrevNextButton";
 
@@ -10,23 +9,9 @@ const AddOns: Component = () => {
         { label: "Larger storage", description: "Extra 1TB of cloud save", monthlyPrice: 2, yearlyPrice: 20},
         { label: "Customizable profile", description: "Custom theme on your profile", monthlyPrice: 2, yearlyPrice: 20}
     ];
-    const [currentAddons, setCurrentAddons] = createSignal<Addon[]>([...answers.addons] ?? [] as Addon[]);
-    //  todo set store everytime, not only when pressing next
-    const saveAnswers = (): boolean => {
-        if (validate(currentAddons())) {
-            setAnswers(
-                'addons',
-                () => ({
-                    ...currentAddons(),
-                }),
-            );
-            return true;
-        }
-        return false;
-    }
 
     const selectAddon = (addon: Addon): void => {
-        const addons: Addon[] = currentAddons();
+        const addons: Addon[] = [...answers?.addons] ?? [] as Addon[];
         const index: number = addons.findIndex(el => el.label === addon.label);
 
         if (index >= 0) {
@@ -34,7 +19,12 @@ const AddOns: Component = () => {
         } else {
             addons.push(addon);
         }
-        setCurrentAddons([...addons]);
+        setAnswers(
+            'addons',
+            () => ({
+                ...addons,
+            }),
+        );
     }
 
     return (<div class="flex flex-col h-full">
@@ -42,10 +32,10 @@ const AddOns: Component = () => {
         <p class="page-description">Add-ons help enhance your gaming experience.</p>
         <form>
             <For each={addons}>
-                {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={!!currentAddons()?.find(el => el.label === addon.label)} onClick={selectAddon} />}
+                {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={!!answers.addons?.find(el => el.label === addon.label)} onClick={selectAddon} />}
             </For>
 
-            <PrevNextButton saveAnswers={saveAnswers} />
+            <PrevNextButton isFormValid={true} />
         </form>
     </div>)
 }

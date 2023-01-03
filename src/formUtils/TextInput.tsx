@@ -9,10 +9,10 @@ type TextInputProps = {
 const TextInput = (props: TextInputProps): JSX.Element => {
 
     return (<div class="flex flex-col gap-y-1">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between w-full">
             <label for={props.label} class="input-label">{props.label}</label>
             <Show when={!!props.formHandler.fieldHasError(props.label)}>
-                <small>{props.formHandler.getFieldError(props.label)}</small>
+                <small class="text-red-600 text-sm font-semibold">{props.formHandler.getFieldError(props.label)}</small>
             </Show>
         </div>
         <input
@@ -28,7 +28,7 @@ const TextInput = (props: TextInputProps): JSX.Element => {
                 props.formHandler.validateField(name);
                 props.formHandler.touchField(name);
             }}
-            class="text-input"
+            class={"text-input "+(props.formHandler.fieldHasError(props.label) ? "input-errored" : "")}
             required
         />
     </div>)

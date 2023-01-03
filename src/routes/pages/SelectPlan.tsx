@@ -1,4 +1,4 @@
-import {Component, For} from "solid-js";
+import {Component, For, onMount} from "solid-js";
 import PlanCard from "../../formUtils/PlanCard";
 import {answers, BillingPlan, Plan, setAnswers} from "../../store/answers";
 import PrevNextButton from "../../layout/PrevNextButton";
@@ -9,6 +9,12 @@ const SelectPlan: Component = () => {
         { label: "advanced", monthlyPrice: 12, yearlyPrice: 120 },
         { label: "pro", monthlyPrice: 15, yearlyPrice: 150 },
     ];
+
+    onMount(() => {
+        if (!answers.selectedPlan?.label) {
+            selectPlan(plans[0]);
+        }
+    });
 
     const selectPlan = (plan: Plan): void => {
         setAnswers(

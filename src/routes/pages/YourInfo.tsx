@@ -1,5 +1,4 @@
-import {Component, createEffect, createSignal} from "solid-js";
-import {answers, PersonalInformation, setAnswers} from "../../store/answers";
+import {Component} from "solid-js";
 import {useFormHandler, yupSchema} from "solid-form-handler";
 import {personalInformationSchema} from "../../formUtils/validation";
 import TextInput from "../../formUtils/TextInput";
@@ -7,14 +6,11 @@ import PrevNextButton from "../../layout/PrevNextButton";
 
 const YourInfo: Component = () => {
     const formHandler = useFormHandler(yupSchema(personalInformationSchema));
-    const { formData } = formHandler;
 
     const submit = async (event: Event) => {
         event.preventDefault();
-        console.log("submit")
         try {
             await formHandler.validateForm();
-            console.log('Data sent with success: ' + JSON.stringify(formData()));
         } catch (error) {
             console.error(error);
         }

@@ -19,7 +19,10 @@ const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: Prev
     }
 
     const next = (): void => {
+        console.log("clicked")
+        console.log(props)
         if (props.isFormValid) {
+            console.log("next is form valid")
             const route: RouteDefinition = routes[step() + 1];
             navigate(typeof route.path === "string" ? route.path : route.path[0]);
         }

@@ -1,4 +1,4 @@
-import {JSX} from "solid-js";
+import {JSX, Show} from "solid-js";
 
 type TextInputProps = {
     label: string;
@@ -9,7 +9,12 @@ type TextInputProps = {
 const TextInput = (props: TextInputProps): JSX.Element => {
 
     return (<div class="flex flex-col gap-y-1">
-        <label for={props.label} class="input-label">{props.label}</label>
+        <div class="flex items-center justify-between">
+            <label for={props.label} class="input-label">{props.label}</label>
+            <Show when={!!props.formHandler.fieldHasError(props.label)}>
+                <small>{props.formHandler.getFieldError(props.label)}</small>
+            </Show>
+        </div>
         <input
             name={props.label}
             type={props.type}
@@ -22,12 +27,10 @@ const TextInput = (props: TextInputProps): JSX.Element => {
                 //Field is validated and touched.
                 props.formHandler.validateField(name);
                 props.formHandler.touchField(name);
-            }}            class="text-input"
+            }}
+            class="text-input"
             required
         />
-        {props.formHandler.fieldHasError(props.label) && (
-            <small>{props.formHandler.getFieldError(props.label)}</small>
-        )}
     </div>)
 }
 

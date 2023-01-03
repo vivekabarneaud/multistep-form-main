@@ -37,7 +37,7 @@ const SelectPlan: Component = () => {
         );
     }
 
-    return (<div class="flex flex-col h-full">
+    return (<div class="flex flex-col h-full px-6">
         <h2 class="page-title">Select your plan</h2>
         <p class="page-description">You have the option of monthly or yearly billing.</p>
         <form>

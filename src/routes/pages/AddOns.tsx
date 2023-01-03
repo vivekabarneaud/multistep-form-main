@@ -27,7 +27,7 @@ const AddOns: Component = () => {
         );
     }
 
-    return (<div class="flex flex-col h-full">
+    return (<div class="flex flex-col h-full px-10">
         <h2 class="page-title">Pick add-ons</h2>
         <p class="page-description">Add-ons help enhance your gaming experience.</p>
         <form>

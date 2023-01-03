@@ -1,4 +1,3 @@
-import { A } from "@solidjs/router";
 import {createSignal, For, ParentComponent, Show} from "solid-js";
 import NavbarDesktop from "./NavbarDesktop";
 import routes from "../routes/routes";
@@ -6,8 +5,7 @@ import NavbarButton from "./NavbarButton";
 
 const Layout: ParentComponent = (props) => {
     const [screenW, setScreenW] = createSignal<number>(window.innerWidth);
-    const routesToShow = [...routes];
-    routesToShow.pop();
+    const routesToShow = routes.slice(1, routes.length - 1);
 
     window.addEventListener('resize', () => {
         setScreenW(window.innerWidth);

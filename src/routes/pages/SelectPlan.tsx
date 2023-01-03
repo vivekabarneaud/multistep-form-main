@@ -1,7 +1,6 @@
-import {Component, createSignal, For} from "solid-js";
+import {Component, For, onMount} from "solid-js";
 import PlanCard from "../../formUtils/PlanCard";
 import {answers, BillingPlan, Plan, setAnswers} from "../../store/answers";
-import {validate} from "../../formUtils/validation";
 import PrevNextButton from "../../layout/PrevNextButton";
 
 const SelectPlan: Component = () => {
@@ -10,29 +9,32 @@ const SelectPlan: Component = () => {
         { label: "advanced", monthlyPrice: 12, yearlyPrice: 120 },
         { label: "pro", monthlyPrice: 15, yearlyPrice: 150 },
     ];
-    const [currentPlan, setCurrentPlan] = createSignal<Plan>(answers.selectedPlan ?? plans[0]);
-    const [billingPlan, setBillingPlan] = createSignal<BillingPlan>(answers.selectedPlan?.billingPlan ?? BillingPlan.MONTHLY);
+
+    onMount(() => {
+        if (!answers.selectedPlan?.label) {
+            selectPlan(plans[0]);
+        }
+    });
 
     const selectPlan = (plan: Plan): void => {
-        setCurrentPlan(plan);
+        setAnswers(
+            'selectedPlan',
+            () => ({
+                ...plan,
+                billingPlan: answers.selectedPlan?.billingPlan ?? BillingPlan.MONTHLY
+            }),
+        );
     }
+
     const toggleBillingPlan = (): void => {
-        billingPlan() === BillingPlan.MONTHLY ?
-            setBillingPlan(BillingPlan.YEARLY) :
-            setBillingPlan(BillingPlan.MONTHLY);
-    }
-    const saveAnswers = (): boolean => {
-        if (validate(currentPlan())) {
-            setAnswers(
-                'selectedPlan',
-                () => ({
-                    ...currentPlan(),
-                    billingPlan: billingPlan(),
-                }),
-            );
-            return true;
-        }
-        return false;
+        setAnswers(
+            'selectedPlan',
+            () => ({
+                ...answers.selectedPlan,
+                billingPlan: answers.selectedPlan?.billingPlan === BillingPlan.MONTHLY ?
+                    BillingPlan.YEARLY : BillingPlan.MONTHLY
+            }),
+        );
     }
 
     return (<div class="flex flex-col h-full">
@@ -41,20 +43,20 @@ const SelectPlan: Component = () => {
         <form>
             <div class="flex flex-col gap-y-3 md:flex-row md:gap-y-0 md:gap-x-3">
                 <For each={plans}>
-                    {(plan: Plan) => <PlanCard plan={plan} billingPlan={billingPlan()} selected={currentPlan()?.label === plan?.label} onClick={selectPlan} />}
+                    {(plan: Plan) => <PlanCard plan={plan} billingPlan={answers.selectedPlan?.billingPlan ?? BillingPlan.MONTHLY} selected={answers.selectedPlan?.label === plan?.label} onClick={selectPlan} />}
                 </For>
             </div>
 
             <div class="mt-4 py-1 flex items-center justify-center gap-x-2 bg-[#F8F9FE] rounded-lg text-sm">
-                <span class={billingPlan() === BillingPlan.MONTHLY ? "input-label" : "font-medium text-gray-400"}>Monthly</span>
+                <span class={answers.selectedPlan?.billingPlan === BillingPlan.MONTHLY ? "input-label" : "font-medium text-gray-400"}>Monthly</span>
                 <label class="relative cursor-pointer w-20 h-10 rounded-full bg-[#03285A] scale-50">
-                    <input type="checkbox" id="check" class="sr-only peer" checked={billingPlan() === BillingPlan.YEARLY} onChange={() => toggleBillingPlan()}/>
+                    <input type="checkbox" id="check" class="sr-only peer" checked={answers.selectedPlan?.billingPlan === BillingPlan.YEARLY} onChange={() => toggleBillingPlan()}/>
                     <span class="absolute w-2/5 h-4/5 bg-white rounded-full left-1 top-1 peer-checked:left-11 transition-all duration-500" />
                 </label>
-                <span class={billingPlan() === BillingPlan.YEARLY ? "input-label" : "font-medium text-gray-400"}>Yearly</span>
+                <span class={answers.selectedPlan?.billingPlan === BillingPlan.YEARLY ? "input-label" : "font-medium text-gray-400"}>Yearly</span>
             </div>
 
-            <PrevNextButton saveAnswers={saveAnswers} />
+            <PrevNextButton isFormValid={true} />
         </form>
     </div>)
 }

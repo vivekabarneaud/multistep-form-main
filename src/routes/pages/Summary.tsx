@@ -18,12 +18,6 @@ const Summary: Component = () => {
         return answers?.selectedPlan?.yearlyPrice + yearlyAddonsPrice;
     })
 
-    const confirm = (): boolean => {
-        console.log("confirm!")
-        //TODO
-        return true;
-    }
-
     return (<div class="flex flex-col h-full">
         <h2 class="page-title">Finishing up</h2>
         <p class="page-description">Double check everything looks OK before confirming.</p>
@@ -47,12 +41,12 @@ const Summary: Component = () => {
             </div>
         </div>
 
-        <div class="flex items-center justify-between px-5 pt-6">
+        <div class="flex items-center justify-between px-5 pt-6 pb-8">
             <span class="text-sm text-gray-400">Total (per {answers?.selectedPlan?.billingPlan === BillingPlan.YEARLY ? "year" : "month"})</span>
             <span class="text-[#4137D2] font-bold">+${total}</span>
         </div>
 
-        <PrevNextButton saveAnswers={confirm} />
+        <PrevNextButton isFormValid={true} />
     </div>)
 }
 

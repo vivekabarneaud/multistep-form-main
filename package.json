@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.5.1",
-    "solid-js": "^1.5.1"
+    "solid-form-handler": "1.0.0-alpha.5",
+    "solid-js": "^1.5.1",
+    "yup": "^0.32.11"
   }
 }

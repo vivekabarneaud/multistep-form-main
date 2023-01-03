@@ -3,7 +3,7 @@ import {RouteDefinition, useLocation, useNavigate} from "@solidjs/router";
 import routes from "../routes/routes";
 
 type PrevNextButtonProps = {
-    saveAnswers: () => boolean;
+    isFormValid: boolean;
 }
 
 const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: PrevNextButtonProps) => {
@@ -11,17 +11,18 @@ const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: Prev
     const navigate = useNavigate();
     const step = createMemo<number>(() => routes.findIndex((route: RouteDefinition) => location.pathname === route.path));
 
-    const prev = (ev: Event): void => {
-        ev.preventDefault();
+    const prev = (): void => {
         if (step() > 0) {
             const route: RouteDefinition = routes[step() - 1];
             navigate(typeof route.path === "string" ? route.path : route.path[0]);
         }
     }
 
-    const next = (ev: Event): void => {
-        ev.preventDefault();
-        if (props.saveAnswers()) {
+    const next = (): void => {
+        console.log("clicked")
+        console.log(props)
+        if (props.isFormValid) {
+            console.log("next is form valid")
             const route: RouteDefinition = routes[step() + 1];
             navigate(typeof route.path === "string" ? route.path : route.path[0]);
         }
@@ -29,10 +30,10 @@ const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: Prev
 
     return (<div class="flex fixed md:relative justify-between items-end bottom-0 inset-x-0 py-4 pr-4 md:pr-0 md:py-0 w-full bg-white md:bg-transparent md:h-full">
             <Show when={step() > 0} fallback={<div></div>}>
-                <button class="px-3 py-2 bg-transparent text-gray-400 font-semibold" onClick={(ev: Event) => prev(ev)}>Go back</button>
+                <button class="px-3 py-2 bg-transparent text-gray-400 font-semibold" onClick={() => prev()}>Go back</button>
             </Show>
-            <Show when={step() < 3} fallback={<button type="submit" class="px-4 py-2 rounded bg-[#483EFE] hover:bg-[#5F56EE] text-white" onClick={(ev: Event) => next(ev)}>Confirm</button>}>
-                <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={(ev: Event) => next(ev)}>Next step</button>
+            <Show when={step() < 3} fallback={<button type="submit" class="px-4 py-2 rounded bg-[#483EFE] hover:bg-[#5F56EE] text-white" onClick={() => next()}>Confirm</button>}>
+                <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={() => next()}>Next step</button>
             </Show>
         </div>
     )

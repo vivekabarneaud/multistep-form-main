@@ -3,20 +3,31 @@ import {JSX} from "solid-js";
 type TextInputProps = {
     label: string;
     type: string;
-    placeholder: string;
-    onChange: (ev: Event) => void;
+    formHandler: any;
 }
 
 const TextInput = (props: TextInputProps): JSX.Element => {
+
     return (<div class="flex flex-col gap-y-1">
         <label for={props.label} class="input-label">{props.label}</label>
         <input
+            name={props.label}
             type={props.type}
-            placeholder={props.placeholder}
-            class="text-input"
-            onChange={props.onChange}
+            value={props.formHandler.getFieldValue('email')}
+            onInput={({ currentTarget: { name, value } }) =>
+                //Sets and validates the field value inside the form handler.
+                props.formHandler.setFieldValue(name, value)
+            }
+            onBlur={({ currentTarget: { name } }) => {
+                //Field is validated and touched.
+                props.formHandler.validateField(name);
+                props.formHandler.touchField(name);
+            }}            class="text-input"
             required
         />
+        {props.formHandler.fieldHasError(props.label) && (
+            <small>{props.formHandler.getFieldError(props.label)}</small>
+        )}
     </div>)
 }
 

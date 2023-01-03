@@ -3,8 +3,7 @@ import routes from "../routes/routes";
 import NavbarButton from "./NavbarButton";
 
 const NavbarDesktop: Component = () => {
-    const routesToShow = [...routes];
-    routesToShow.pop();
+    const routesToShow = routes.slice(1, routes.length - 1);
 
     return (
         <div class="flex flex-col absolute top-0 left-0 pl-6 pt-7">

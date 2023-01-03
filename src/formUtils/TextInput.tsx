@@ -13,7 +13,7 @@ const TextInput = (props: TextInputProps): JSX.Element => {
         <input
             name={props.label}
             type={props.type}
-            value={props.formHandler.getFieldValue('email')}
+            value={props.formHandler.getFieldValue(props.label)}
             onInput={({ currentTarget: { name, value } }) =>
                 //Sets and validates the field value inside the form handler.
                 props.formHandler.setFieldValue(name, value)

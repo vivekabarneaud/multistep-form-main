@@ -38,7 +38,7 @@ body {
 }
 
 .input-label {
-  @apply text-sm font-medium text-[#0E2E60]
+  @apply text-sm font-medium text-[#0E2E60] capitalize
 }
 
 .text-input {

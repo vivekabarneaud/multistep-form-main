@@ -19,7 +19,7 @@ const YourInfo: Component = () => {
             console.error(error);
         }
     };
-    // TODO required field: manage CSS
+
     return (<div class="flex flex-col h-full">
         <h2 class="page-title">Personal info</h2>
         <p class="page-description">Please provide your name, email address, and phone number.</p>

@@ -1,4 +1,4 @@
-import {JSX, Show} from "solid-js";
+import {JSX, onMount, Show} from "solid-js";
 import {answers, setAnswers} from "../store/answers";
 
 type TextInputProps = {
@@ -8,6 +8,11 @@ type TextInputProps = {
 }
 
 const TextInput = (props: TextInputProps): JSX.Element => {
+    onMount(() => {
+        if (answers.personalInformation?.[props.label]) {
+            props.formHandler.setFieldValue(props.label, answers.personalInformation?.[props.label]);
+        }
+    })
 
     return (<div class="flex flex-col gap-y-1">
         <div class="flex items-center justify-between w-full">

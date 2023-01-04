@@ -32,3 +32,10 @@ Your app is ready to be deployed!
 ## Deployment
 
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+## TODOS
+## Handle click on steps
+## Handle first click on Next Step
+## Deploy with images
+## Fonts
+## Optional: form handling is select-plan and add-ons

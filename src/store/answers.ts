@@ -38,5 +38,7 @@ export const [answers, setAnswers] = createStore<Answers>({
 } as Answers);
 
 export const isFormFilled = (): boolean => {
-    return !!(answers.personalInformation?.email && answers.selectedPlan?.label);
+    return !!(answers.personalInformation?.name &&
+        answers.personalInformation?.email &&
+        answers.personalInformation?.phone && answers.selectedPlan?.label);
 }

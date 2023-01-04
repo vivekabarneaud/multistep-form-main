@@ -36,3 +36,7 @@ export const [answers, setAnswers] = createStore<Answers>({
     selectedPlan: {} as Plan,
     addons: [] as Addon[]
 } as Answers);
+
+export const isFormFilled = (): boolean => {
+    return !!(answers.personalInformation?.email && answers.selectedPlan?.label);
+}

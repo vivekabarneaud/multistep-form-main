@@ -1,5 +1,5 @@
 import {Component, For} from "solid-js";
-import {Addon, answers, BillingPlan, setAnswers} from "../../store/answers";
+import {Addon, answers, BillingPlan, isFormFilled, setAnswers} from "../../store/answers";
 import AddonCard from "../../formUtils/AddonCard";
 import PrevNextButton from "../../layout/PrevNextButton";
 
@@ -21,9 +21,7 @@ const AddOns: Component = () => {
         }
         setAnswers(
             'addons',
-            () => ({
-                ...addons,
-            }),
+            () => addons,
         );
     }
 
@@ -35,7 +33,7 @@ const AddOns: Component = () => {
                 {(addon: Addon) => <AddonCard addon={addon} billingPlan={answers?.selectedPlan?.billingPlan || BillingPlan.MONTHLY} selected={!!answers.addons?.find(el => el.label === addon.label)} onClick={selectAddon} />}
             </For>
 
-            <PrevNextButton isFormValid={true} />
+            <PrevNextButton isFormValid={isFormFilled()} />
         </form>
     </div>)
 }

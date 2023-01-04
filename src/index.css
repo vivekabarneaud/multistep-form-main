@@ -37,7 +37,7 @@ body {
   @apply rounded-full flex items-center justify-center w-8 h-8 border border-white text-sm font-semibold text-black bg-[#BEE2FC]
 }
 
-.step-btn-disabled {
+.btn-disabled {
   @apply pointer-events-none bg-gray-400 !important
 }
 

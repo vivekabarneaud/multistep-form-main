@@ -14,7 +14,7 @@ const NavbarButton: (props: NavbarButtonProps) => JSX.Element = (props: NavbarBu
     }
     const disabledClass = (): string => {
         if (props.step == 4 && (!answers.personalInformation?.name || !answers.selectedPlan?.label)) {
-            return "step-btn-disabled"
+            return "btn-disabled"
         }
         return "";
     }

@@ -1,6 +1,7 @@
 import {createMemo, JSX, Show} from "solid-js";
 import {RouteDefinition, useLocation, useNavigate} from "@solidjs/router";
 import routes from "../routes/routes";
+import {isFormFilled} from "../store/answers";
 
 type PrevNextButtonProps = {
     isFormValid: boolean;
@@ -25,12 +26,16 @@ const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: Prev
         }
     }
 
+    const disabledClass = (): string => {
+        return isFormFilled() ? "" : "btn-disabled";
+    }
+
     return (<div class="flex fixed md:relative justify-between items-end bottom-0 inset-x-0 py-4 pr-4 md:pr-0 md:py-0 w-full bg-white md:bg-transparent md:h-full">
             <Show when={step() > 0} fallback={<div></div>}>
                 <button class="px-3 py-2 bg-transparent text-gray-400 font-semibold" onClick={() => prev()}>Go back</button>
             </Show>
-            <Show when={step() < 3} fallback={<button type="submit" class="px-4 py-2 rounded bg-[#483EFE] hover:bg-[#5F56EE] text-white" onClick={() => next()}>Confirm</button>}>
-                <button type="submit" class="px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white" onClick={() => next()}>Next step</button>
+            <Show when={step() < 4} fallback={<button type="submit" class="px-4 py-2 rounded bg-[#483EFE] hover:bg-[#5F56EE] text-white" onClick={() => next()}>Confirm</button>}>
+                <button type="submit" class={"px-3 py-2 rounded bg-[#042859] hover:bg-[#174A8B] text-white " + disabledClass()} onClick={() => next()}>Next step</button>
             </Show>
         </div>
     )

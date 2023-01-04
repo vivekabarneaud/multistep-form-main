@@ -34,8 +34,9 @@ Your app is ready to be deployed!
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
 
 ## TODOS
-## Handle click on steps
-## Handle first click on Next Step
+## Je trouve ça naze que ça mette direct dans le store sans avoir confirmé en appuyant sur next
+## Un tooltip sur le bouton désactivé pour dire les éléments manquants, ce serait cool
+## Missing tick on checkboxes
 ## Deploy with images
 ## Fonts
 ## Optional: form handling is select-plan and add-ons

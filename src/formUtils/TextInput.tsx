@@ -8,12 +8,11 @@ type TextInputProps = {
 }
 
 const TextInput = (props: TextInputProps): JSX.Element => {
-    //FIXME errors only appear at second click on Next button if the inputs haven't been clicked
     onMount(() => {
         if (answers.personalInformation?.[props.label]) {
             props.formHandler.setFieldValue(props.label, answers.personalInformation?.[props.label]);
         }
-    })
+    });
 
     return (<div class="flex flex-col gap-y-1">
         <div class="flex items-center justify-between w-full">

@@ -27,7 +27,7 @@ const PrevNextButton: (props: PrevNextButtonProps) => JSX.Element = (props: Prev
     }
 
     const disabledClass = (): string => {
-        return isFormFilled() ? "" : "btn-disabled";
+        return props.isFormValid ? "" : "btn-disabled";
     }
 
     return (<div class="flex fixed md:relative justify-between items-end bottom-0 inset-x-0 py-4 pr-4 md:pr-0 md:py-0 w-full bg-white md:bg-transparent md:h-full">

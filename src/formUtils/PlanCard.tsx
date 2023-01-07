@@ -14,7 +14,7 @@ const PlanCard: (props: PlanCardProps) => JSX.Element = (props: PlanCardProps) =
 
     return (<div class={"flex md:flex-col items-center md:items-start border-[1px] rounded-lg p-3 md:w-[120px] cursor-pointer transition-all duration-200 "+selectedClass()} onClick={() => props.onClick(props.plan)}>
         <img
-            src={"/dist/assets/images/icon-"+props?.plan?.label+".svg"}
+            src={"/assets/images/icon-"+props?.plan?.label+".svg"}
             alt={"plan icon "+props?.plan?.label}
             class={"w-9 md:mb-6"}
         />

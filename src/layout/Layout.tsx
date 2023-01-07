@@ -29,7 +29,7 @@ const Layout: ParentComponent = (props) => {
         }>
             <div class="flex p-3 bg-white shadow-xl rounded-xl">
                 <div class="relative">
-                    <img src="/dist/assets/images/bg-sidebar-desktop.svg" alt="sidebar background abstract" />
+                    <img src="/assets/images/bg-sidebar-desktop.svg" alt="sidebar background abstract" />
                     <NavbarDesktop />
                 </div>
                 <div class="w-[600px] px-20 pt-10 pb-6">

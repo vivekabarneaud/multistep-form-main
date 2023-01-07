@@ -15,17 +15,17 @@ body {
   @font-face {
     font-family: Ubuntu;
     font-weight: 400;
-    src: url(/dist/assets/fonts/Ubuntu-Regular.ttf) format("ttf");
+    src: url(/assets/fonts/Ubuntu-Regular.ttf) format("ttf");
   }
   @font-face {
     font-family: Ubuntu;
     font-weight: 500;
-    src: url(/dist/assets/fonts/Ubuntu-Medium.ttf) format("ttf");
+    src: url(/assets/fonts/Ubuntu-Medium.ttf) format("ttf");
   }
   @font-face {
     font-family: Ubuntu;
     font-weight: 600;
-    src: url(/dist/assets/fonts/Ubuntu-Bold.ttf) format("ttf");
+    src: url(/assets/fonts/Ubuntu-Bold.ttf) format("ttf");
   }
 }
 
@@ -75,7 +75,7 @@ form {
 
 @media(max-width: 576px) {
   .main {
-    background-image: url("/dist/assets/images/bg-sidebar-mobile.svg");
+    background-image: url("/assets/images/bg-sidebar-mobile.svg");
     background-repeat: no-repeat;
     background-size: contain;
   }
